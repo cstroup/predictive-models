@@ -1,0 +1,96 @@
+{
+    "classification": {
+        "description": "Categorical (Discrete labels)",
+        "use_cases": "Spam detection, fraud detection, sentiment analysis",
+        "default_dataset": "dataset = load_breast_cancer()",
+        "target_col": "Target",
+        "models": {
+            "Logistic Regression": "LogisticRegression(max_iter=500)",
+            "Ridge Classifier": "RidgeClassifier()",
+            "Perceptron": "Perceptron()",
+            "Passive Aggressive": "PassiveAggressiveClassifier()",
+            "Decision Tree": "DecisionTreeClassifier()",
+            "Extra Tree": "ExtraTreeClassifier()",
+            "Random Forest": "RandomForestClassifier()",
+            "Extra Trees": "ExtraTreesClassifier()",
+            "Gradient Boosting": "GradientBoostingClassifier()",
+            "AdaBoost": "AdaBoostClassifier()",
+            "Bagging Classifier": "BaggingClassifier()",
+            "SVC (RBF Kernel)": "SVC(kernel='rbf', probability=True)",
+            "SVC (Linear Kernel)": "SVC(kernel='linear', probability=True)",
+            "K-Nearest Neighbors": "KNeighborsClassifier()",
+            "MLP Classifier (Neural Net)": "MLPClassifier(hidden_layer_sizes=(50,50), max_iter=500, early_stopping=True)",
+            "Gaussian Naive Bayes": "GaussianNB()",
+            "Bernoulli Naive Bayes": "BernoulliNB()",
+            "Quadratic Discriminant Analysis": "QuadraticDiscriminantAnalysis()",
+            "Linear Discriminant Analysis": "LinearDiscriminantAnalysis()"
+        },
+        "Golden Score": {
+            "Accuracy": 0.25,
+            "F1": 0.40,
+            "Precision": 0.15,
+            "Recall": 0.10,
+            "ROC-AUC": 0.10
+        }
+    },
+    "regression": {
+        "description": "Continuous (Numerical values)",
+        "use_cases": "House price prediction, stock price forecasting, demand estimation",
+        "default_dataset": "dataset = fetch_california_housing()",
+        "target_col": "Target",
+        "models": {
+            "Linear Regression": "LinearRegression()",
+            "Ridge Regression": "Ridge()",
+            "Lasso Regression": "Lasso()",
+            "ElasticNet": "ElasticNet()",
+            "Bayesian Ridge": "BayesianRidge()",
+            "Decision Tree": "DecisionTreeRegressor()",
+            "Extra Tree": "ExtraTreeRegressor()",
+            "Random Forest": "RandomForestRegressor()",
+            "Extra Trees": "ExtraTreesRegressor()",
+            "Gradient Boosting": "GradientBoostingRegressor()",
+            "Hist Gradient Boosting": "HistGradientBoostingRegressor()",
+            "AdaBoost": "AdaBoostRegressor()",
+            "SVR (RBF Kernel)": "SVR(kernel='rbf')",
+            "SVR (Linear Kernel)": "SVR(kernel='linear')",
+            "K-Nearest Neighbors": "KNeighborsRegressor()",
+            "MLP Regressor (Neural Net)": "MLPRegressor(hidden_layer_sizes=(50,50), max_iter=500, early_stopping=True)",
+            "Polynomial Regression (Degree 2)": "make_pipeline(PolynomialFeatures(degree=2), LinearRegression())",
+            "XGBoost": "XGBRegressor()",
+            "LightGBM": "LGBMRegressor()",
+            "CatBoost": "CatBoostRegressor(verbose=0)"
+        },
+        "Golden Score": {
+            "MAE": 0.40,
+            "MSE": 0.30,
+            "R²": 0.30
+        }
+    },
+    "time-series": {
+        "description": "Time Series Forecasting; Continuous (Time-dependent numerical values)",
+        "use_cases": "Weather prediction, sales forecasting, stock price trends",
+        "default_dataset": "dataset = sm.datasets.m4_hourly.load_pandas().data",
+        "target_col": "",
+        "models": {
+            "ARIMA": "ARIMA(order=(5,1,0))",
+            "SARIMA": "SARIMAX(order=(1,1,1), seasonal_order=(1,1,1,12))",
+            "Prophet": "Prophet()"
+        },
+        "Golden Score": {
+            "MAE": 0.50,
+            "MSE": 0.30,
+            "R²": 0.20
+        }
+    },
+    "anomaly-detection": {
+        "description": "Outlier detection",
+        "use_cases": "Fraud detection, network intrusion detection, defect detection",
+        "default_dataset": "TBD",
+        "models": {
+            "Isolation Forest": "IsolationForest()",
+            "One-Class SVM": "OneClassSVM()",
+            "Local Outlier Factor": "LocalOutlierFactor()",
+            "Elliptic Envelope": "EllipticEnvelope()"
+        }
+    }
+}

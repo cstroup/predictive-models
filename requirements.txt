@@ -1,0 +1,37 @@
+# pip3 install numpy pandas matplotlib scikit-learn plotly yfinance statsmodels
+# pip3 install xgboost lightgbm
+# pip3 install cmdstanpy
+# pip3 install prophet --no-cache-dir
+# pip3 install --no-cache-dir catboost
+# pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+# pip3 install torch
+# Verify: python -c "import numpy; import pandas; import xgboost; import lightgbm; import catboost; import torch; import prophet; print('All packages installed successfully!')"
+numpy
+pandas
+plotly
+yfinance
+statsmodels
+prophet
+torch
+scikit-learn
+matplotlib
+xgboost
+lightgbm
+catboost
+tpot
+
+# Add to Path
+# echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
+# source ~/.zshrc
+# echo $PATH
+
+# Clean Install
+# pip3 cache purge
+# pip3 install --upgrade --no-cache-dir pip setuptools wheel
+# pip3 install --no-warn-script-location -r requirements.txt
+
+# fbprohet issue
+# pip install --upgrade pip setuptools wheel
+# pip install --no-cache-dir Cython numpy
+# pip install --no-cache-dir pystan==2.19.1.1
+# pip install --no-cache-dir prophet
