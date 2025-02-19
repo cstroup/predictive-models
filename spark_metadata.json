@@ -1,0 +1,115 @@
+{
+    "etl_pipeline_1": {
+        "spark_settings": [
+            "spark.conf.set('spark.sql.parquet.fs.optimized.committer.enabled', 'true')",
+            "spark.conf.set('spark.sql.files.maxPartitionBytes', '256MB')"
+        ],
+        "source_connection": {
+            "astea_sql_server": {
+                "source_type": "SQL Server",
+                "read_format": "jdbc",
+                "azure_creds": {
+                    "host": "kv-abc-host-name",
+                    "user": "kv-abc-user-name",
+                    "password": "kv-abc-password"
+                },
+                "port": 1433,
+                "default_db": "[dbo]",
+                "connection_string": "jdbc:sqlserver://{sql_host}:{etl_pipeline['port']};database={etl_pipeline['default_db']}"
+            }
+        },
+        "tables": {
+            "table_1": {
+                "source_connection": "astea_sql_server",
+                "schema": "dbo",
+                "table_name": "table_1",
+                "dependencies": ["table_2", "table_3"],
+                "query_parameters": {
+                    "numPartitions": 8,
+                    "partitionColumn": "id",
+                    "lowerBound": 1,
+                    "upperBound": 1000000,
+                    "fetchsize": 10000
+                },
+                "transformations": {
+                    "add_columns": [
+                        {"name": "year", "expression": "year(date)"},
+                        {"name": "month", "expression": "month(date)"}
+                    ],
+                    "sorting": ["company_id", "date"],
+                    "repartition": 16
+                },
+                "destination": {
+                    "storage": "ADLS",
+                    "container": "container",
+                    "storage_account": "storageaccount",
+                    "file_format": "parquet",
+                    "compression": "snappy",
+                    "partitionBy": ["year", "month"],
+                    "mode": "overwrite",
+                    "path": "abfss://container@storageaccount.dfs.core.windows.net/table_1"
+                }
+            },
+            "table_2": {
+                "schema": "dbo",
+                "table_name": "table_2",
+                "dependencies": ["table_3"],
+                "query_parameters": {
+                    "numPartitions": 4,
+                    "partitionColumn": "transaction_id",
+                    "lowerBound": 1000,
+                    "upperBound": 500000,
+                    "fetchsize": 5000
+                },
+                "transformations": {
+                    "add_columns": [
+                        {"name": "year", "expression": "year(event_date)"},
+                        {"name": "month", "expression": "month(event_date)"}
+                    ],
+                    "sorting": ["customer_id", "event_date"],
+                    "repartition": 8
+                },
+                "destination": {
+                    "storage": "ADLS",
+                    "container": "container",
+                    "storage_account": "storageaccount",
+                    "file_format": "parquet",
+                    "compression": "gzip",
+                    "partitionBy": ["year", "month"],
+                    "mode": "append",
+                    "path": "abfss://container@storageaccount.dfs.core.windows.net/table_2"
+                }
+            },
+            "table_3": {
+                "schema": "dbo",
+                "table_name": "table_3",
+                "dependencies": [],
+                "query_parameters": {
+                    "numPartitions": 10,
+                    "partitionColumn": "order_id",
+                    "lowerBound": 5000,
+                    "upperBound": 2000000,
+                    "fetchsize": 20000
+                },
+                "transformations": {
+                    "add_columns": [
+                        {"name": "year", "expression": "year(order_date)"},
+                        {"name": "month", "expression": "month(order_date)"}
+                    ],
+                    "sorting": ["store_id", "order_date"],
+                    "repartition": 20
+                },
+                "destination": {
+                    "storage": "ADLS",
+                    "container": "container",
+                    "storage_account": "storageaccount",
+                    "file_format": "delta",
+                    "compression": "snappy",
+                    "partitionBy": ["year", "month"],
+                    "mode": "overwrite",
+                    "path": "abfss://container@storageaccount.dfs.core.windows.net/table_3"
+                }
+            }
+        }
+    }
+}

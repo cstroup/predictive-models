@@ -11,7 +11,7 @@ from tpot import TPOTClassifier, TPOTRegressor
 from sklearn.datasets import load_breast_cancer, fetch_california_housing
 
 # Set problem type
-problem_type = "classification" 
+problem_type = "regression" 
 file_name = f"tpot_{problem_type}_best_pipeline.py"
 
 # Suppress warnings
@@ -123,7 +123,7 @@ def extract_model_performance(model):
 def save_results(df_results):
     """Saves model comparison results to CSV."""
     os.makedirs("tpot_results", exist_ok=True)
-    results_path = os.path.join("tpot_results", "model_comparisons.csv")
+    results_path = os.path.join("tpot_results", f"{problem_type}_model_comparisons.csv")
     df_results.to_csv(results_path, index=False)
     print(f"\nModel comparison results saved to: {results_path}")
 

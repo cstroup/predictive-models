@@ -6,9 +6,9 @@
 # pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 # pip3 install torch
 # Verify: python -c "import numpy; import pandas; import xgboost; import lightgbm; import catboost; import torch; import prophet; print('All packages installed successfully!')"
-numpy
-pandas
-plotly
+numpy==1.26.4
+pandas==2.2.3
+plotly==6.0.0
 yfinance
 statsmodels
 prophet
@@ -19,6 +19,7 @@ xgboost
 lightgbm
 catboost
 tpot
+pyspark
 
 # Add to Path
 # echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
